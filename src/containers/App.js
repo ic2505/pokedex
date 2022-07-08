@@ -7,22 +7,34 @@ class App extends Component {
   constructor() {
     super(); // calls the constructor of the component, needed to use this function.
     this.state = {
+      pokeNames: [],
       pokemon: [],
       searchfield: "",
+      n: 1,
     };
     // console.log("constructor");
   }
 
   componentDidMount() {
-   this.setState({ pokemon: ["ditto", "pikachu", "squirtle", "charmander"] });
-    // console.log("componentDidMount");
+    this.setState({
+      pokeNames: ["ditto", "pikachu", "squirtle", "charmander"],
+    });
+
+    fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
+    .then((response) => response.json())
+    .then((users) => this.setState({ pokemon: users }));
   }
+
+  getPikachu = () => {
+  }
+
 
   render() {
     return (
       <div className="App">
         <div className="">
-          <Card pokeProp={this.state.pokemon[3]} />
+          {console.log( this.state.pokemon.forms)}
+          <Card pokeProp={this.state.pokeNames[this.state.n]} />
           <h4> {this.props.greeting}</h4>
         </div>
 
